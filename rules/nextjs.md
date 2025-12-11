@@ -3,6 +3,11 @@
 ## Overview
 Feature-Sliced Design (FSD) adapted for Next.js App Router (Thin App, Thick Core).
 
+## Development Environment
+*   **Node Manager**: `nvm` (Node Version Manager).
+    *   Ensure `.nvmrc` is present in the project root specifying the Node version.
+    *   Run `nvm use` to sync the environment.
+
 ## Core Principles
 1.  **Thin App, Thick Core**: `src/app` for routing only. `src/core` for Providers/Layouts.
 2.  **Screens Layer**: Intermediate layer (`src/screens`) for assembling widgets/features into page views, allowing dynamic imports in Core.

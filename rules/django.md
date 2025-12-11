@@ -3,7 +3,12 @@
 ## Overview
 This document outlines a modular **Django** project structure designed for scalability and maintainability. It emphasizes a strict separation of concerns using a custom `apps/` directory, a fractal API architecture using **Django Ninja**, and a centralized configuration setup.
 
-## 1. 🏗️ Architectural Philosophy (Modular Monolith)
+## 1. Development Environment
+*   **Python Manager**: `uv` (Fast Python package installer and resolver).
+    *   Use `uv pip install -r requirements.txt` for speed.
+    *   Use `uv venv` for creating virtual environments.
+
+## 2. 🏗️ Architectural Philosophy (Modular Monolith)
 
 The project is built on the **Modular Monolith** principle. The codebase resides in a single repository but is logically divided into independent **apps**, each responsible for a specific business domain.
 
@@ -36,7 +41,7 @@ project_root/
 
 ---
 
-## 2. 🧩 API Architecture (`django-ninja-extra`)
+## 3. 🧩 API Architecture (`django-ninja-extra`)
 
 The API is built using **`django-ninja-extra`**, focusing on cleanliness, type safety (Type Hinting), automatic documentation (OpenAPI), and Dependency Injection.
 
@@ -79,7 +84,7 @@ apps/domain_name/
 
 ---
 
-## 3. 🛡️ Authentication & Authorization
+## 4. 🛡️ Authentication & Authorization
 
 ### 3.1. Dual Authentication Strategy
 For projects utilizing Telegram Mini Apps (TMA) alongside admin panels:
@@ -89,7 +94,7 @@ For projects utilizing Telegram Mini Apps (TMA) alongside admin panels:
 
 ---
 
-## 4. 💡 Unified System Codes (`apps/codes`)
+## 5. 💡 Unified System Codes (`apps/codes`)
 
 To ensure **consistency**, all API responses follow a hybrid strategy using a central implementation in `apps/codes`.
 
