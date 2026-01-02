@@ -1,8 +1,15 @@
-# Agent Data
+# Ignore everything
+*
+
+# Recursively allow directory traversal
+!*/
+
+# Allow .md files
+!*.md
+
+# Allow .gitignore itself
+!.gitignore
+
+# Explicitly exclude agent data directories
 antigravity/
 antigravity-browser-profile/
-.agent/
-
-# System
-thumbs.db
-desktop.ini

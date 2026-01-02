@@ -70,6 +70,10 @@ apps/domain_name/
 ### 2.3. Schemas (`schemas.py`)
 *   Use **Pydantic** (`ninja.Schema`).
 *   Define `Input` and `Output` structures.
+*   **Naming Convention**:
+    *   **Input Schemas**: Must end with `In` (e.g., `UserIn`, `ProjectIn`).
+    *   **Validation/Update Schemas**: Must end with `UpdateIn` (e.g., `UserUpdateIn`).
+    *   **Output Schemas**: Must end with `Out` (e.g., `UserOut`, `ProjectListOut`).
 *   Enforce automatic validation and serialization.
 
 ### 2.4. Dependency Injection (`module.py`)

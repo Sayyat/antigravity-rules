@@ -1,36 +1,48 @@
 # Generic Next.js Project Structure
 
 ## Overview
-Feature-Sliced Design (FSD) adapted for Next.js App Router (Thin App, Thick Core).
+Feature-Sliced Design (FSD) adapted for Next.js App Router.
 
 ## Development Environment
 *   **Node Manager**: `nvm` (Node Version Manager).
     *   Ensure `.nvmrc` is present in the project root specifying the Node version.
     *   Run `nvm use` to sync the environment.
 
-## Core Principles
-1.  **Thin App, Thick Core**: `src/app` for routing only. `src/core` for Providers/Layouts.
-2.  **Screens Layer**: Intermediate layer (`src/screens`) for assembling widgets/features into page views, allowing dynamic imports in Core.
-3.  **Isomorphic Safety**: Split utils into `.ts` (Shared/Iso) and `.client.ts` (Client-only).
-4.  **Strategy Pattern**: Use `services/{client|server}/index.ts` to switch Real vs Mock based on Env.
+## Directory Layout & Responsibilities
 
-## Directory Layout
-- `src/app`: Routes (`page.tsx`, `layout.tsx`).
-- `src/core`: App Shell (`CoreShell`, `Providers`, `useNavigationNodes`).
-- `src/screens`: Page assemblies (Lazy loaded by `core/hooks`).
-- `src/widgets`: Composition (`BottomNavBar`, `ScheduleWidget`).
-- `src/features`: Business Logic (`Authentication`, `Payment`).
-- `src/shared`: Reusable (`api.ts`, `urls.client.ts`, `cn`).
+1.  **`src/app/`**: Application Entry & Routing
+    *   **Purpose**: Manages routing, global providers, `globals.css`, layouts, and metadata.
+    *   **Rule**: Calls respective `*Screen.tsx` components from `screens/`.
+    *   **Content**: `page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`.
 
-## Architectural Flow
-**App** (Route) -> **Core** (Shell/Nav) -> **Screens** (Lazy Assembly) -> **Widgets** (UI Blocks) -> **Features** (Logic) -> **Shared** (Utils)
+2.  **`src/screens/`**: Page Logic & Layout
+    *   **Purpose**: Defines the layout and logic for a single screen/page.
+    *   **Structure**: Composes `widgets/` and `features/`.
+    *   **Naming**: Files and components must have the `Screen` suffix (e.g., `ProjectDetailScreen.tsx`).
+
+3.  **`src/widgets/`**: Composition Layer
+    *   **Purpose**: Composes meaningful, complex UI blocks from `features/`.
+    *   **Naming**: Files and components must have the `Widget` suffix (e.g., `ProjectListWidget.tsx`).
+
+4.  **`src/features/`**: Business Logic & Dumb Components
+    *   **Purpose**: Holds domain-specific "dumb" components and logic.
+    *   **Subfolders**:
+        *   `components/`: Real components and their skeletons. Upper layers compose them.
+        *   `hooks/`, `lib/`, `providers/`, `services/`, `types/`.
+    *   **Rule**: Keep components pure and presentational where possible.
+
+5.  **`src/shared/`**: Reusable Utilities
+    *   **Purpose**: Project-agnostic, reusable code.
+    *   **Structure**: Mirrors `features/` structure but for shared code.
+    *   **Exports**:
+        *   `index.ts`: Env-agnostic code.
+        *   `client.ts`: Client-side specific exports.
+        *   `server.ts`: Server-side specific exports.
 
 ## Naming Conventions
-- **Interfaces**: `I` prefix.
-- **Types**: `T` prefix.
-- **Enums**: `E` prefix.
-- **Client Files**: `*.client.ts`.
+*   **Types**: `T` prefix (e.g., `TUser`).
+*   **Interfaces**: `I` prefix (e.g., `IProject`).
+*   **Enums**: `E` prefix (e.g., `EStatus`).
 
 ## Localization
-See [Smart I18n Standards](i18n.md) for full details on `smart-i18next-cli`.
-
+*   See [Smart I18n Standards](i18n.md).
